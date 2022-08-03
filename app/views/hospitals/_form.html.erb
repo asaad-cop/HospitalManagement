@@ -1,0 +1,32 @@
+<%= form_with(model: @hospital, local: true) do |form| %>
+
+  <% if form.object.errors.any? %>
+    <div>
+      <h3> Error saving the hospital</h3>
+      <% form.object.errors.full_messages.each do |message| %>
+        <%= message %><br>
+      <% end %>
+    </div>
+    <hr>
+  <% end %>
+
+  <div>
+    <%= form.label :Name %>
+    <%= form.text_field :name %>
+  </div><br>
+
+  <div>
+    <%= form.label :City %>
+    <%= form.text_field :city %>
+  </div><br>
+
+  <div>
+      <%= form.label :Address %>
+      <%= form.text_field :address %>
+  </div><br>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>

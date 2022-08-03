@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HospitalManagement</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar bg-dark">
+        <div>
+        <% if current_user %>
+          <%= link_to 'Home', homepage_path, class: "btn btn-info" %>
+          
+          <% if can? :manage, Hospital %>
+            <%= link_to 'Hospitals', hospitals_path, class: "btn btn-info" %>
+          <% end %>
+          
+          <% if can? :manage, Treatment %>
+            <%= link_to 'Treatments', treatments_path, class: "btn btn-info" %>
+          <% end %>
+          
+          <% if can? :view, :doctor %> 
+            <%= link_to 'On Board doctors', ondoctors_path, class: "btn btn-info" %>
+          <% end %>
+
+          <% if can? :view, :patient %>
+            <%= link_to 'Available treatments', patient_path, class: "btn btn-info" %>
+          <% end %>
+
+          <% if can? :view, :requestinfo %>
+            <%= link_to 'See your request status', requestsinfo_path, class: "btn btn-info" %>
+          <% end %>
+
+          <% if can? :view, :requests %>
+            <% if not current_user.hospital_id.nil? %>
+              <%= link_to 'See patient requests', requests_path, class: "btn btn-info" %>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <div>
+          <%= link_to "logout", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+        </div>
+
+        <% else %>
+          <%= link_to "Register", new_user_registration_path, class: "btn btn-info" %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-success" %>
+        <% end %>
+    </nav>
+    <div class="container text-center">
+      <h4 class="notice"><%= notice %></h4>
+      <h4 class="alert"><%= alert %></h4>
+    </div>
+
+
+    
+    
+    <%= yield %>
+  </body>
+</html>

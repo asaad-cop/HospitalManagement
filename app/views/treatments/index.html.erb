@@ -1,0 +1,30 @@
+
+<div class="container">
+  <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+          <% @treatment.each do |treatment| %>
+          <tr>
+              <td><%= treatment.name %></td>
+              <td><%= link_to 'Show', treatment, class: "btn btn-info" %>
+              <td><%= link_to 'Edit', edit_treatment_path(treatment), class: "btn btn-warning"%></td>
+              <td><%= link_to 'Delete this treatment', treatment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%></td>
+          </tr>
+          <% end %>
+      </tbody>
+  </table>
+  <br>
+
+
+  <%= link_to "Create New Treatment", new_treatment_path, class: "btn btn-success" %><br><br>
+  <%= link_to "Go to Hospital", hospitals_path %><br><br>
+
+  <%= link_to 'Back to Homepage', homepage_path %>
+</div>

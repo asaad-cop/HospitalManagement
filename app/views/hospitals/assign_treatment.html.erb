@@ -1,0 +1,25 @@
+<div class="container">
+    <h2> assign treatment page </h2>
+
+    <%= form_for :User do |form| %>
+
+        <div>
+            <% tr = Treatment.all %>
+            <%= form.label :treatment %>
+            <%= form.select(:treatment_id, tr.pluck(:name, :id)) %>    
+        </div><br>
+
+        <div>
+            <%= form.label :price %>
+            <%= form.number_field :price %>    
+        </div><br>
+
+        <div>
+            <%= form.submit "Assign treatment" %>
+        </div>
+
+    <% end %>
+    <br>
+
+    <%= link_to 'Back to hospitals', hospitals_path %>
+</div>

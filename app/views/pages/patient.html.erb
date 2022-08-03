@@ -1,0 +1,13 @@
+<br><br>
+<div class="container text-center">
+    <h2>Available Treatments</h2>
+    <% @treatments.each do |treatment| %>
+        <% if treatment.hospitals.count > 0 %>
+            <%= treatment.name %>
+            <%= link_to '|      Request appointment ', selectedtreatment_path(treatment) %><br><br>
+        <% end %>
+    <% end %>
+    <br>
+
+    <%= link_to 'Back to Homepage', homepage_path %>
+</div>

@@ -1,0 +1,19 @@
+<br><br>
+<div class="container text-center">
+    <% if @hts.count > 0 %>
+        <% @hts.each do |ht| %>
+            <% docs = User.where(hospital_id: ht.hospital.id, treatment_id: ht.treatment.id) %>
+            <% docs.each do |doc| %>
+                <%= ht.hospital.name %><br>
+                <%= ht.price %><br>
+                <%= doc.name %><br>
+                <%= link_to 'Request appointment for this treatment', appointment_path(doc) %><br><br>
+            <% end %>
+        <% end %>
+    <% else %>
+        <h3> This treatment is not being offered in any hospital </h3>
+    <% end %>
+
+    <br>
+    <%= link_to 'Back to treatments', patient_path %>
+</div>

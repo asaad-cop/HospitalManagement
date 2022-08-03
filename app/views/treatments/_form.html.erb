@@ -1,0 +1,20 @@
+<%= form_with(model: @treatment, local: true) do |form| %>
+
+  <% if form.object.errors.any? %>
+    <h3> Error saving the treatment</h3>
+    <% form.object.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+
+
+  <div>
+    <%= form.label :Name_of_Treatment %>
+    <%= form.text_field :name %>
+  </div><br>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>

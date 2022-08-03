@@ -1,0 +1,32 @@
+<br>
+
+<div class="container">
+    <h3><%=" #{@hospital.name} is situated in #{@hospital.city} "%></h3>
+    <h4><%="Address:  #{@hospital.address} "%></h4>
+
+    <% hts = HospitalTreatment.where(hospital_id: @hospital.id) %>
+    <% if hts.count > 0 %>
+        <h3> The hospital has following treatments </h3>
+
+        <% hts.each do |ht| %>
+            <%= " #{ht.treatment.name} for Rs #{ht.price} " %><br>
+            <% docs = User.where(hospital_id: ht.hospital_id, treatment_id: ht.treatment_id) %>
+            <% if docs.count > 0 %>
+                <p> Following doctors work on this treatment </p>
+                <% docs.each do |doc| %>
+                    <%=" - #{doc.name} "%><br>
+                <% end %>
+            <% else %>
+                <p> No doctors are available in this hospital for this treatment </p>
+            <% end %>
+            <%= link_to 'Remove this treatment', removetreatment_path(@hospital.id, ht.treatment.id), class: "btn btn-danger" %>
+            <hr>
+        <% end %>
+
+    <% else %>
+        <h2> The hospital has no treatments yet. </h2>
+    <% end %>
+
+    <%= link_to 'Back to hospitals', hospitals_path %>
+
+</div>

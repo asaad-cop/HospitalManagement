@@ -1,0 +1,28 @@
+<br><br>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Doctor Name</th>
+            <th>Hospital Name</th>
+            <th>Treatment Name</th>
+        </tr>
+        </thead>
+    
+    <tbody>
+        <% @doctors.each do |doctor| %>
+        <tr>
+            <td><%= doctor.name %></td>
+            <td><%= doctor.hospital.name %></td>
+            <td><%= doctor.treatment.name %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+
+
+
+    <%= link_to 'Back to Homepage', homepage_path %>
+
+</div>

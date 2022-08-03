@@ -1,0 +1,19 @@
+<br>
+<div class="container">
+    <h3><%="Treatment name: #{@treatment.name} "%></h3>
+
+    <% hts = HospitalTreatment.where(treatment_id: @treatment.id) %>
+
+    <% if hts.count > 0 %>
+        <h2> The treatment is offered in following hospitals </h2>
+        <ul class="list-group">
+        <% hts.each do |ht| %>
+            <li class="list-group-item"><%= " #{ht.hospital.name} for Rs #{ht.price} " %></li>
+        <% end %>
+        </ul>
+        <br>
+    <% end %>
+
+    <%= link_to 'Back to Treatments', treatments_path %>
+
+</div>

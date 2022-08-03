@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+  <h2>This is Home Page</h2>
+  <p>Welcome to Hospital Management application!</p>
+  <% if not current_user %>
+    <h3>Please login to use the application</h3>
+  <% else %>
+    <h3><%="You are logged in as #{current_user.name} (#{current_user.user_type})" %></h3>
+  <% end %>
+    <br> 
+</div>
+
+<div class="container text-center">
+<% if current_user &&  current_user.user_type == 'doctor' %> 
+    <% if current_user.hospital_id.nil? or current_user.treatment_id.nil? %>
+        <h4> Admin has not yet assigned you any hospital or treatment </h4>
+        <h4> Please wait until they assign you a hospital and treatment </h4>
+    <% else %>
+        <h3><%= "Admin assigned you #{current_user.hospital.name} and #{current_user.treatment.name}" %></h3>
+    <% end %>
+<% end %>
+
+</div>

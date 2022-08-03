@@ -1,0 +1,27 @@
+<br>
+<div class="container">
+    <h2>Pending requests</h2>
+    <% if @pend_requests.count > 0 %>
+        <% @pend_requests.each do |req| %>
+            <%="Patient name: #{req.patient.name.capitalize()} "%><br><br>
+            <%= link_to 'Accept request', accept_path(req), class: "btn btn-success" %><br><br>
+            <%= link_to 'Reject request', reject_path(req), class: "btn btn-danger" %><br>
+        <% end %>
+    <% else %>
+        <p> No pending requests </p>
+    <% end %>
+    <hr>
+
+    <h2> Accepted rejuests </h2>
+    <% if @acpt_requests.count > 0 %>
+        <% @acpt_requests.each do |req| %>
+            <%="Patient name: #{req.patient.name.capitalize()} "%><br><br>
+        <% end %>
+    <% else %>
+        <p> No accepted requests </p>
+    <% end %>
+
+
+    <%= link_to 'Back to Homepage', homepage_path %>
+
+</div>

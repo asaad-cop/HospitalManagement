@@ -1,0 +1,40 @@
+
+<div class="container">
+  <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>Address</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+          <% @hospitals.each do |hospital| %>
+          <tr>
+              <td><%= hospital.name %></td>
+              <td><%= hospital.city %></td>
+              <td><%= hospital.address %></td>
+              <td><%= link_to 'Show', hospital, class: "btn btn-secondary" %>
+              <td><%= link_to 'Edit', edit_hospital_path(hospital), class: "btn btn-warning"%></td>
+              <td><%= link_to 'Delete hospital', hospital, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%></td>
+              <td><%= link_to 'Add treatment', assigntreatment_path(hospital), class: "btn btn-info" %></td>
+              <% if User.where(user_type: 'doctor').where.not(hospital_id: nil).count > 0 %>
+                <td><%= link_to 'Add a pending doctor', doctors_path(hospital), class: "btn btn-info" %></td>
+              <% end %>
+          </tr>
+          <% end %>
+      </tbody>
+  </table>
+  <br>
+
+
+  <%= link_to "Create New Hospital", new_hospital_path, class: "btn btn-success" %><br><br>
+  <%= link_to "Go to Treatments", treatments_path %><br><br>
+
+  <%= link_to 'Back to Homepage', homepage_path %>
+
+</div>
