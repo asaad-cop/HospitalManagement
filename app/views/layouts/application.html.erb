@@ -27,8 +27,8 @@
             <%= link_to 'On Board doctors', ondoctors_path, class: "btn btn-info" %>
           <% end %>
 
-          <% if can? :view, :patient %>
-            <%= link_to 'Available treatments', patient_path, class: "btn btn-info" %>
+          <% if can? :read, Treatment && current_user.patient? %>
+            <%= link_to 'Available treatments', treatments_path, class: "btn btn-info" %>
           <% end %>
 
           <% if can? :view, :requestinfo %>

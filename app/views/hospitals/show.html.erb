@@ -10,16 +10,16 @@
 
         <% hts.each do |ht| %>
             <%= " #{ht.treatment.name} for Rs #{ht.price} " %><br>
+            <%= link_to 'Remove this treatment', removetreatment_path(@hospital.id, ht.treatment.id), class: "btn btn-danger" %><br><br>
             <% docs = User.where(hospital_id: ht.hospital_id, treatment_id: ht.treatment_id) %>
             <% if docs.count > 0 %>
                 <p> Following doctors work on this treatment </p>
                 <% docs.each do |doc| %>
-                    <%=" - #{doc.name} "%><br>
+                    <%=" - #{doc.name} "%>
                 <% end %>
             <% else %>
                 <p> No doctors are available in this hospital for this treatment </p>
             <% end %>
-            <%= link_to 'Remove this treatment', removetreatment_path(@hospital.id, ht.treatment.id), class: "btn btn-danger" %>
             <hr>
         <% end %>
 

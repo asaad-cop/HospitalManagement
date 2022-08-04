@@ -4,7 +4,7 @@
 
     <% tr = @hospital.treatments %>
     <% if tr.count > 0 %>
-        <% dr = User.doctor.where(hospital_id: nil) + User.doctor.where(treatment_id: nil) %>
+        <% dr = User.doctor.all - User.doctor.onboard %>
         <% if dr.count > 0 %>
             <%= form_for :User do |form| %>
                 <div>

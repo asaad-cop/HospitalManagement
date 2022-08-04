@@ -1,6 +1,6 @@
 class HospitalsController < ApplicationController
     load_and_authorize_resource
-    before_action :set_hospital, only: %i[ show edit update destroy assigntreatment assigndoc ]
+    before_action :set_hospital, only: %i[ show edit update destroy assign_treatment assign_doc remove_doctor ]
 
     def index
         @hospitals = Hospital.all
@@ -87,6 +87,20 @@ class HospitalsController < ApplicationController
                 format.html { redirect_to hospital_url(@hospital), notice: "Treatment is successfully Removed from this hospital."}
             else
                 format.html { redirect_to hospital_url(@hospital), notice: "An error occured while removing the treatment."}
+            end
+        end
+    end
+
+    def remove_doctor
+        doc = User.find(params[:id2])
+        doc.update(hospital_id: nil, treatment_id: nil)
+        req = Request.where(user_id: doc.id)
+        respond_to do |format|
+            if doc.save
+                req.destroy_all
+                format.html { redirect_to ondoctors_url, notice: "Doctor successfully removed." }
+            else
+                format.html { redirect_to ondoctors_url, notice: "An error occured while removing the doctor."}
             end
         end
     end

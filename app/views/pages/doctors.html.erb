@@ -16,13 +16,10 @@
             <td><%= doctor.name %></td>
             <td><%= doctor.hospital.name %></td>
             <td><%= doctor.treatment.name %></td>
+            <td><%= link_to 'Remove this doctor', removedoctor_path(doctor.hospital, doctor), class: "btn btn-danger" %></td>
         </tr>
         <% end %>
     </tbody>
     </table>
-
-
-
-    <%= link_to 'Back to Homepage', homepage_path %>
 
 </div>
