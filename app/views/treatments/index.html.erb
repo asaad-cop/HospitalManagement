@@ -23,13 +23,13 @@
     </table>
     <br>
     <%= link_to "Create New Treatment", new_treatment_path, class: "btn btn-success" %><br><br>
-   
+
   <% elsif current_user.patient? %>
     <h2>Available Treatments</h2>
     <% @treatments.each do |treatment| %>
         <% if treatment.users.onboard.count > 0 %>
             <%= treatment.name %>
-            <%= link_to 'Request appointment ', selectedtreatment_path(treatment), class: "btn btn-success" %><br><br>
+            <%= link_to 'Request appointment ', treatment, class: "btn btn-success" %><br><br>
         <% end %>
     <% end %>
   <% end %>

@@ -3,9 +3,7 @@
     <h2>Pending requests</h2>
     <% if @pend_requests.count > 0 %>
         <% @pend_requests.each do |req| %>
-            <%= req.user.name %><br>
-            <%= req.user.hospital.name %><br>
-            <%= req.user.treatment.name %><br><br>
+            <%= render 'info', req: req %>
         <% end %>
     <% else %>
         <p> No pending requests </p>
@@ -15,9 +13,7 @@
     <h2> Accepted requests </h2>
     <% if @acpt_requests.count > 0 %>
         <% @acpt_requests.each do |req| %>
-            <%= req.user.name %><br>
-            <%= req.user.hospital.name %><br>
-            <%= req.user.treatment.name %><br><br>
+            <%= render 'info', req: req %>
         <% end %>
     <% else %>
         <p> No accepted requests </p>
@@ -27,9 +23,7 @@
     <h2> Rejected requests </h2>
     <% if @rejc_requests.count > 0 %>
         <% @rejc_requests.each do |req| %>
-            <%= req.user.name %><br>
-            <%= req.user.hospital.name %><br>
-            <%= req.user.treatment.name %><br><br>
+            <%= render 'info', req: req %>
         <% end %><br><br>
     <% else %>
         <p> No rejected requests </p>

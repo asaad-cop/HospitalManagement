@@ -1,19 +1,47 @@
-<br>
 <div class="container">
     <h3><%="Treatment name: #{@treatment.name} "%></h3>
 
     <% hts = HospitalTreatment.where(treatment_id: @treatment.id) %>
 
     <% if hts.count > 0 %>
-        <h2> The treatment is offered in following hospitals </h2>
-        <ul class="list-group">
-        <% hts.each do |ht| %>
-            <li class="list-group-item"><%= " #{ht.hospital.name} for Rs #{ht.price} " %></li>
-        <% end %>
-        </ul>
-        <br>
-    <% end %>
 
+        <% if current_user.admin? %>
+            <h2> The treatment is offered in following hospitals </h2>
+            <ul class="list-group">
+            <% hts.each do |ht| %>
+                <li class="list-group-item"><%= " #{ht.hospital.name} for Rs #{ht.price} " %></li>
+            <% end %>
+            </ul>
+
+        <% elsif current_user.patient? %>
+            <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Hospital Name</th>
+                <th>Doctor Name</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+        
+            <tbody>
+            <% hts.each do |ht| %>
+                <% docs = User.where(hospital_id: ht.hospital.id, treatment_id: ht.treatment.id) %>
+                <% docs.each do |doc| %>
+                <tr>
+                    <td><%= ht.hospital.name %></td>
+                    <td><%= doc.name %></td>
+                    <td><%= ht.price %></td>
+                    <td><%= link_to 'Send an appointment request', appointment_path(doc), class: "btn btn-success" %></td>
+                </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+            </table>
+        <% end %><br>
+
+    <% else %>
+        <h3> This treatment is not being offered in any hospital </h3>
+    <% end %>
     <%= link_to 'Back to Treatments', treatments_path %>
 
 </div>

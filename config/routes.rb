@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get 'hospitals/:id/doctors', to: 'hospitals#assign_doc',  as: 'doctors'
   post 'hospitals/:id/doctors', to: 'hospitals#associate_doc'
   
-  get 'pages/patient/:id', to: 'pages#selected_treatment', as: 'selectedtreatment'
-  
   get 'requests/requests', as: 'requests'
   get 'requests/requests_info', to: 'requests#requests_info', as: 'requestsinfo'
   

@@ -8,8 +8,4 @@ class PagesController < ApplicationController
     @doctors = User.doctor.onboard
   end
 
-  def selected_treatment
-    @hts = HospitalTreatment.where(treatment_id: params[:id])
-  end
-
 end
